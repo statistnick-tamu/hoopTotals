@@ -20,6 +20,7 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
   v <- var
   t <- time/40
   prob <- NULL
+  price <- NULL
 
   # calculate parameters
   lambda.hat <- ybar/v
@@ -34,7 +35,7 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
     # given the current total points at time t
     tau <- threshold
     h <- current
-    prob <- gammainc(eta.hat * (1-t), lambda.hat * (tau - h))[3]
+    prob <- gammainc(eta.hat * (1-t), lambda.hat * (tau - h))[[3]]
   }
 
   ## if supplied line
@@ -42,11 +43,21 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
     tot.line <- line
     eta.hat.b <- lambda.hat * tot.line
     exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b * t))
-    prob <- gammainc(eta.hat.b * (1-t), lambda.hat * (tau - h))[3]
+    prob <- gammainc(eta.hat.b * (1-t), lambda.hat * (tau - h))[[3]]
   }
 
+  # calculate a price using American odds if there's a probability
+  if(prob > .5){
+    price <- prob[which(prob > 0.5)] / (1 - prob[which(prob > 0.5)]) * -100
+  }
+  else if(prob <= .5){
+    price <- (1 - prob[which(prob <= 0.5)]) / prob[which(prob <= 0.5)] * 100
+  }
+  price <- round(price)
+
   # Return
-  # exp.pts - expected number of points scored
-  # prob - probabiltity of scoring higher than supplied threshold
-  return(list(exp.pts = exp.pts, prob = prob))
+  # exp.pts = expected number of points scored
+  # prob = probabiltity of scoring higher than supplied threshold
+  # price = the true price of the threshold in American odds
+  return(list(exp.pts = exp.pts, prob = prob, price = price))
 }
