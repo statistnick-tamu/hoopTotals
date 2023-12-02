@@ -10,6 +10,7 @@ ybar <- 3.48
 
 # var, (actual - ybar)^2
 var <- 5.02
+#var <- 5.02**2
 
 lambda.hat <- ybar/var
 eta.hat <- 40 * lambda.hat * ybar
@@ -24,13 +25,11 @@ rgamma(1, rate=lambda.hat, shape=eta.hat * t)
 # given the current total points at time t
 
 # threshold
-tau <- 80
+tau <- 180
 
 # current pts
 h <- 75
-
-pgamma(.5, lambda.hat * (tau - h), eta.hat * (1-t))
-incgam(lambda.hat * (tau - h), eta.hat * (1-t))
+prob <- gammainc(eta.hat * (1-t), lambda.hat * (tau - h))[3]
 
 ## line adjustment if avail
 tot.line <- 135.5
