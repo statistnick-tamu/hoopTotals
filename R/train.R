@@ -9,10 +9,37 @@
 
 train <- function(home.df, away.df){
 
-  ## test data format
+  ## data checks
+  if(dim(home.df)[2] != 4){
+    stop("Please provide a home team data frame with 4 columns")
+  }
+
+  if(dim(away.df)[2] != 4){
+    stop("Please provide an away team data frame with 4 columns")
+  }
 
   names(home.df) <- c("game_id", "secs_remaining", "home_score", "away_score")
   names(away.df) <- c("game_id", "secs_remaining", "home_score", "away_score")
+
+  if(!is.numeric(home.df$secs_remaining) || !is.numeric(home.df$secs_remaining)
+     || !is.numeric(home.df$secs_remaining)){
+    stop("Please provide a valid home team data frame")
+  }
+
+  if(!is.numeric(away.df$secs_remaining) || !is.numeric(away.df$secs_remaining)
+     || !is.numeric(away.df$secs_remaining)){
+    stop("Please provide a valid away team data frame")
+  }
+
+  if(length(which(home.df$secs_remaining < 0)) > 0 || length(which(home.df$secs_remaining < 0)) > 0
+     || length(which(home.df$secs_remaining < 0)) > 0){
+    stop("Please remove negative values from home team data frame")
+  }
+
+  if(length(which(away.df$secs_remaining < 0)) > 0 || length(which(away.df$secs_remaining < 0)) > 0
+     || length(which(away.df$secs_remaining < 0)) > 0){
+    stop("Please remove negative values from home team data frame")
+  }
 
   ## calculate per min stats
   home.param <- home.df %>%
@@ -43,6 +70,6 @@ train <- function(home.df, away.df){
 
   # Return
   # ybar - average points per minute
-  # v - points per min variance
+  # var - points per min variance
   return(list(ybar = ybar, var = var))
 }

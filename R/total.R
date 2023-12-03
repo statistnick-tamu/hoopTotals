@@ -13,14 +13,35 @@
 
 total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NULL, line = NULL){
 
-  ## test data format
+  ## data checks
+
+  if(ppm < 0){
+    stop("Please pass in valid points per minute")
+  }
+
+  if(var < 0){
+    stop("Please pass in valid scoring variability")
+  }
+
+  if(time < 0 || time > 40){
+    stop("Please pass in a valid time remaining in minutes (1 to 40)")
+  }
+
+  if(!is.null(threshold) && threshold < 0){
+    stop("Please pass in a valid scoring threshold")
+  }
+
+  if(!is.null(line) || line < 0){
+    stop("Please pass in the O/U line")
+  }
 
   # initialize params
   ybar <- ppm
   v <- var
   t <- time/40
-  prob <- NULL
-  price <- NULL
+  h <- 0
+  prob <- 0
+  price <- 0
 
   # calculate parameters
   lambda.hat <- ybar/v
@@ -36,13 +57,14 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
     tau <- threshold
     h <- current
     prob <- gammainc(eta.hat * (1-t), lambda.hat * (tau - h))[[3]]
+    exp.pts <- exp.pts + h
   }
 
   ## if supplied line
   if(!is.null(line)){
     tot.line <- line
     eta.hat.b <- lambda.hat * tot.line
-    exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b * t))
+    exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b * t)) + h
     prob <- gammainc(eta.hat.b * (1-t), lambda.hat * (tau - h))[[3]]
   }
 
@@ -50,13 +72,13 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
   if(prob > .5){
     price <- prob[which(prob > 0.5)] / (1 - prob[which(prob > 0.5)]) * -100
   }
-  else if(prob <= .5){
+  else if(prob <= .5 && prob > 0){
     price <- (1 - prob[which(prob <= 0.5)]) / prob[which(prob <= 0.5)] * 100
   }
   price <- round(price)
 
   # Return
-  # exp.pts = expected number of points scored
+  # total.pts = expected number of points scored
   # prob = probabiltity of scoring higher than supplied threshold
   # price = the true price of the threshold in American odds
   return(list(exp.pts = exp.pts, prob = prob, price = price))
