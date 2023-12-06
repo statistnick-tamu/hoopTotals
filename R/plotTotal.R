@@ -1,8 +1,15 @@
-## all parameters required
-# ppm = points per minute combined of the two teams
-# var = ppm variance of the two teams
-# threshold = scoring threshold to meet
-# line = betting line (expected points scored)
+#' plotTotal
+#'
+#' @param ppm points per minute combined of the two teams
+#' @param var ppm variance of the two teams
+#' @param threshold scoring threshold to meet
+#' @param line betting line (expected points scored)
+#'
+#' @return prints out a hypothetical scoring flow chart
+#' @export
+#'
+#' @examples
+#' plotTotal(4.96, 14.38, 168.5, 150.5)
 
 plotTotal <- function(ppm, var, threshold, line){
 

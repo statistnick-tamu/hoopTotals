@@ -1,14 +1,19 @@
-Package: hoopPackage
-Title: What the Package Does (One Line, Title Case)
+Package: hoopTotals
+Title: Calculate in game scoring totals for NCAA basketball games
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Nicholas", "Klein", , "statistnick@tamu.edu", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/statistnick-tamu/hoopPackage
-BugReports: https://github.com/statistnick-tamu/hoopPackage/issues
+URL: https://github.com/statistnick-tamu/hoopTotals
+BugReports: https://github.com/statistnick-tamu/hoopTotals/issues
+Imports: 
+    dplyr,
+    ggplot2,
+    pracma
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
