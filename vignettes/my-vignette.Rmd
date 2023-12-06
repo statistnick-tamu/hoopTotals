@@ -17,3 +17,98 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(hoopTotals)
 ```
+
+# Using hoopTotals
+
+There is a lot of research available for win probability models in various sports.
+However, there is much less research in predicting the number of points scored in a particular game.
+
+This package implements the method described in 'Making real-time predictions for NBA basketball games by combining the historical data and bookmaker’s betting line' for NCAA Men's Basketball, rather than the NBA.
+
+# total
+
+The 'total' function implements the method and returns expected points.
+It needs an estimate of the average and variance of points scored per minute
+for the two teams you are interested in estimating a score for.
+
+3.5 and 5 are used by default as they are the averages from the last two seasons of NCAA Men's Basketball
+
+```{r total1}
+total(3.5, 5)
+```
+
+We would expect two teams that score around 3.5 points per minute (combined) to score 140 points in a game.
+
+Now, let's try adding in some additional information.
+
+# improving total
+
+```{r total2}
+total(3.5, 5, time = 20, current = 80, threshold = 160.5)
+```
+
+We have provided additional information saying that the game is 20 minutes in (halfway through), there 
+have been 80 points scored so far, and we want to know the probability we see more than 160 points.
+
+The function still outputs an expected total, but that has now increased to about 150. Also output is the
+probability that more than 160 points are scored and what the model would consider to be the betting line.
+
+The authors also included an adjusted method which takes into account the line set by the market
+prior to the game.
+
+```{r total3}
+total(3.5, 5, time = 20, current = 80, threshold = 160.5, line = 152.5)
+```
+
+If we provide that additional information saying that the market expected 152.5 points to be scored,
+you can see the expected points are drawn upwards and the probability of hitting the threshold increases.
+
+That's all well and good, but we're still making a general assumption around how much a team scores.
+We can do better than that.
+
+# train
+
+In the 'train' function, you can provide play-by-play data frames for two teams
+and it will calculate the first two parameters to pass back in to the 'total' function.
+
+I've loaded up data from Texas A&M and Iowa State's Men's Basketball teams here.
+
+```{r data}
+head(home.df)
+head(away.df)
+train(home.df, away.df)
+```
+
+Let's pass those into total and see how it changes.
+
+```{r total4}
+total(4.5375, 4.8663)
+```
+
+We expect a much higher scoring game now. 
+
+The two teams played on 11/26/23 and had a much lower expected total.
+
+```{r total5}
+total(4.5375, 4.8663, time=40, current=0, threshold=135.5, line=135.5)
+```
+
+If we feed in the pre-game line, we see a drastic decrease in expected points.
+
+At halftime, there were 70 points scored, let's see how that changes the expectation.
+
+```{r total6}
+total(4.5375, 4.8663, time=20, current=70, threshold=135.5, line=135.5)
+```
+
+Now, we're expecting 138 points and a 62% chance of clearing the pre-game line.
+
+# plotTotal
+
+Lastly, you can plot a hypothetical game flow using the plotTotal function. 
+
+You'll have to provide some similar information as the other functions:
+
+```{r plot}
+plotTotal(ppm=4.5375, var=4.8663, threshold=135.5, line=135.5)
+```

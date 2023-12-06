@@ -37,7 +37,7 @@ plotTotal <- function(ppm, var, threshold, line){
   ybar <- ppm
   v <- var
   lambda.hat <- ybar/v
-  eta.hat <- lambda.hat * tot.line
+  eta.hat <- lambda.hat * line
 
   # generate path
   for(i in i:40){
@@ -51,7 +51,7 @@ plotTotal <- function(ppm, var, threshold, line){
 
   # construct plot
   ggplot2::ggplot(est.df, ggplot2::aes(x = V1, y = est.p)) +
-    ggplot2::geom_step(size = 1, aes(colour="black")) +
+    ggplot2::geom_step(linewidth = 1, aes(colour="black")) +
     ggplot2::geom_hline(aes(yintercept=140, colour = "dodgerblue"), show.legend = FALSE) +
     ggplot2::labs(title = "Hypothetical game flow") +
     ggplot2::labs(x = "Minutes", y = "Points") +

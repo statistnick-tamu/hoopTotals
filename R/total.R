@@ -7,7 +7,7 @@
 #' @param threshold Optional - scoring threshold to meet
 #' @param line Optional - betting line (expected points scored)
 #'
-#' @return A list with the elements
+#' @return A list with the elements (if provided 'current' and 'threshold')
 #'   \item{exp.pts}{the expected points from the game}
 #'   \item{prob}{the probability it exceeds the provided threshold}
 #'   \item{price}{the estimated betting line}
@@ -37,8 +37,8 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
     stop("Please pass in a valid scoring threshold")
   }
 
-  if(!is.null(line) || line < 0){
-    stop("Please pass in the O/U line")
+  if(!is.null(line) && line < 0){
+    stop("Please pass in a valid O/U line")
   }
 
   # initialize params
@@ -83,5 +83,10 @@ total <- function(ppm = 3.5, var = 5, time = 40, current = NULL, threshold = NUL
   }
   price <- round(price)
 
-  return(list(exp.pts = exp.pts, prob = prob, price = price))
+  if(!is.null(current) && !is.null(threshold)){
+    return(list(exp.pts = exp.pts, prob = prob, price = price))
+  }
+  else{
+    return(exp.pts)
+  }
 }
