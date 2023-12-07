@@ -4,38 +4,23 @@
 \alias{total}
 \title{total}
 \usage{
-total(
-  ppm = 3.5,
-  var = 5,
-  time = 40,
-  current = NULL,
-  threshold = NULL,
-  line = NULL
-)
+total(ppm = 3.5, var = 5, line = NULL)
 }
 \arguments{
 \item{ppm}{Points per minute combined of the two teams playing. This defaults to the NCAA 2021-22 & 22-23 average.}
 
 \item{var}{Variance of PPM of the two teams. This defaults to the NCAA 2021-22 & 22-23 average.}
 
-\item{time}{Time remaining in the game. Defaults to full game remaining.}
-
-\item{current}{Optional - current points scored}
-
-\item{threshold}{Optional - scoring threshold to meet}
-
 \item{line}{Optional - betting line (expected points scored)}
 }
 \value{
-A list with the elements (if provided 'current' and 'threshold')
+expected points as a scalar
 \item{exp.pts}{the expected points from the game}
-\item{prob}{the probability it exceeds the provided threshold}
-\item{price}{the estimated betting line}
 }
 \description{
 total
 }
 \examples{
 total(4.96, 14.38)
-total(4.35, 6.9, time = 20, current = 89, threshold = 168.5, line = 150.5)
+total(4.35, 6.9, line = 150.5)
 }

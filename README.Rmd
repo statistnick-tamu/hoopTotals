@@ -43,19 +43,29 @@ devtools::install_github("statistnick-tamu/hoopPackage")
 
 
 total: calculates expected points scored for a game
-train: calculates parameters to pass into total for specific teams
+
+live: adjusts expected points based on what has happened in the game
+
+train: calculates parameters to pass into total & live for specific teams
+
 plotTotal: creates a hypothetical scoring flow plot
 
 
 ## Example
 
-Here is a quick example:
+Here are a few quick examples:
 
 
 ```{r example}
 library(hoopTotals)
 total(3.5,5)
 ```
+
+
+```{r}
+live(3.5, 5, 20, 76, 152)
+```
+
 
 ```{r plot}
 plotTotal(3.5, 5, 140, 144.5)

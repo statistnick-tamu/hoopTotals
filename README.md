@@ -29,18 +29,35 @@ devtools::install_github("statistnick-tamu/hoopPackage")
 
 ## Functions
 
-total: calculates expected points scored for a game train: calculates
-parameters to pass into total for specific teams plotTotal: creates a
-hypothetical scoring flow plot
+total: calculates expected points scored for a game
+
+live: adjusts expected points based on what has happened in the game
+
+train: calculates parameters to pass into total & live for specific
+teams
+
+plotTotal: creates a hypothetical scoring flow plot
 
 ## Example
 
-Here is a quick example:
+Here are a few quick examples:
 
 ``` r
 library(hoopTotals)
 total(3.5,5)
-#> [1] 140.2378
+#> [1] 139.5052
+```
+
+``` r
+live(3.5, 5, 20, 76, 152)
+#> $exp.pts
+#> [1] 145.8256
+#> 
+#> $prob
+#> [1] 0.2926388
+#> 
+#> $price
+#> [1] 242
 ```
 
 ``` r
