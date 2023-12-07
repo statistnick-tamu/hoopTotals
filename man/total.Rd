@@ -27,7 +27,10 @@ total(
 \item{line}{Optional - betting line (expected points scored)}
 }
 \value{
-the expected points from the game, the probability it exceeds the provided threshold, and the estimated betting line
+A list with the elements (if provided 'current' and 'threshold')
+\item{exp.pts}{the expected points from the game}
+\item{prob}{the probability it exceeds the provided threshold}
+\item{price}{the estimated betting line}
 }
 \description{
 total

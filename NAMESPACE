@@ -3,3 +3,6 @@
 export(plotTotal)
 export(total)
 export(train)
+import(dplyr)
+import(ggplot2)
+import(pracma)

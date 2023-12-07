@@ -1,8 +1,8 @@
 ---
-title: "my-vignette"
+title: "hoopTotal-how-to"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{hoopTotal-how-to}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,20 +18,17 @@ knitr::opts_chunk$set(
 library(hoopTotals)
 ```
 
+
 # Using hoopTotals
 
-There is a lot of research available for win probability models in various sports.
-However, there is much less research in predicting the number of points scored in a particular game.
 
-This package implements the method described in 'Making real-time predictions for NBA basketball games by combining the historical data and bookmaker’s betting line' for NCAA Men's Basketball, rather than the NBA.
-
-# total
+## total
 
 The 'total' function implements the method and returns expected points.
 It needs an estimate of the average and variance of points scored per minute
 for the two teams you are interested in estimating a score for.
 
-3.5 and 5 are used by default as they are the averages from the last two seasons of NCAA Men's Basketball
+3.5 and 5 are used by default as they are the averages from the last two seasons of NCAA Men's Basketball.
 
 ```{r total1}
 total(3.5, 5)
@@ -41,7 +38,8 @@ We would expect two teams that score around 3.5 points per minute (combined) to 
 
 Now, let's try adding in some additional information.
 
-# improving total
+
+## improving total
 
 ```{r total2}
 total(3.5, 5, time = 20, current = 80, threshold = 160.5)
@@ -66,12 +64,13 @@ you can see the expected points are drawn upwards and the probability of hitting
 That's all well and good, but we're still making a general assumption around how much a team scores.
 We can do better than that.
 
-# train
+
+## train
 
 In the 'train' function, you can provide play-by-play data frames for two teams
 and it will calculate the first two parameters to pass back in to the 'total' function.
 
-I've loaded up data from Texas A&M and Iowa State's Men's Basketball teams here.
+Included are data from Texas A&M and Iowa State's Men's Basketball teams.
 
 ```{r data}
 head(home.df)
@@ -103,10 +102,10 @@ total(4.5375, 4.8663, time=20, current=70, threshold=135.5, line=135.5)
 
 Now, we're expecting 138 points and a 62% chance of clearing the pre-game line.
 
-# plotTotal
+
+## plotTotal
 
 Lastly, you can plot a hypothetical game flow using the plotTotal function. 
-
 You'll have to provide some similar information as the other functions:
 
 ```{r plot}
