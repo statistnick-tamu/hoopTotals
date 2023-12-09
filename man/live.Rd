@@ -11,7 +11,7 @@ live(ppm = 3.5, var = 5, time = 20, current, threshold, line = NULL)
 
 \item{var}{Variance of PPM of the two teams. This defaults to the NCAA 2021-22 & 22-23 average.}
 
-\item{time}{Time remaining in the game. Defaults to half game remaining (20min).}
+\item{time}{Time passed in the game. Defaults to half game (20min).}
 
 \item{current}{current points scored}
 
@@ -26,7 +26,9 @@ A list with the elements (if provided 'current' and 'threshold')
 \item{price}{the estimated betting line}
 }
 \description{
-live
+Calculates the total expected points for an in progress D1 Men's College Basketball game.
+Also calcuates the probability the score exceeds a provided threshold and includes a conversion
+to what an American betting line would be.
 }
 \examples{
 live(4.35, 6.9, time = 20, current = 89, threshold = 168.5, line = 150.5)

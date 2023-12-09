@@ -4,7 +4,7 @@
 \alias{plotTotal}
 \title{plotTotal}
 \usage{
-plotTotal(ppm, var, threshold, line)
+plotTotal(ppm = 3.5, var = 5, threshold, line)
 }
 \arguments{
 \item{ppm}{points per minute combined of the two teams}
@@ -19,7 +19,7 @@ plotTotal(ppm, var, threshold, line)
 prints out a hypothetical scoring flow chart
 }
 \description{
-plotTotal
+Plots a hypothetical game flow chart for points scored in a D1 Men's College Basketball game.
 }
 \examples{
 plotTotal(4.96, 14.38, 168.5, 150.5)

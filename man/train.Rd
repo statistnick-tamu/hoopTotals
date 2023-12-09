@@ -20,10 +20,12 @@ col 3 = team 1 score
 col 4 = team 2 score}
 }
 \value{
-PPM and variance of PPM to input into the total function
+Average & Variance for PPM to use in total, live, and plotTotal functions.
 }
 \description{
-train
+Reads in two data frames of play-by-play data and calculates the average and variance
+of the two teams. The results are used in other functions from the hoopTotals package.
+Providing more than 5 years' worth of play-by-play may impact performance.
 }
 \examples{
 train(home.df, away.df)

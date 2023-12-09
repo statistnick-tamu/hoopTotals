@@ -18,7 +18,7 @@ expected points as a scalar
 \item{exp.pts}{the expected points from the game}
 }
 \description{
-total
+Calculates the total points expected to be scored in a standard D1 Men's College Basketball game.
 }
 \examples{
 total(4.96, 14.38)
