@@ -69,7 +69,7 @@ We can do better than that.
 ## train
 
 In the 'train' function, you can provide play-by-play data in the form of a data frame for two teams
-and it will calculate the first two parameters to pass back in to the other functions. See the 'train' help text for specifications around how to input the data.
+and it will calculate the first two parameters to pass back in to the other functions. See the 'train' help text for specifications around how to format the data required.
 
 
 Included with the package are data from Texas A&M and Iowa State's Men's Basketball teams from the 2022-23 season and
@@ -104,7 +104,7 @@ At halftime, there were 70 points scored, let's see how that changes the expecte
 live(4.5375, 4.8663, time=20, current=70, threshold=135.5, line=135.5)
 ```
 
-Now, we're expecting 137 points and a 62% chance of clearing the pre-game line.
+Now, we're expecting ~138 points and a 62% chance of clearing the pre-game line.
 
 
 ## plotTotal
