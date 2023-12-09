@@ -24,7 +24,7 @@ You can install the development version of hoopTotals from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("statistnick-tamu/hoopPackage")
+devtools::install_github("statistnick-tamu/hoopPackage", build_vignettes = TRUE)
 ```
 
 ## Functions
@@ -45,13 +45,13 @@ Here are a few quick examples:
 ``` r
 library(hoopTotals)
 total(3.5,5)
-#> [1] 139.5052
+#> [1] 139.8338
 ```
 
 ``` r
 live(3.5, 5, 20, 76, 152)
 #> $exp.pts
-#> [1] 145.8256
+#> [1] 145.9444
 #> 
 #> $prob
 #> [1] 0.2926388
