@@ -35,7 +35,7 @@ You can install the development version of hoopTotals from [GitHub](https://gith
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("statistnick-tamu/hoopPackage", build_vignettes = TRUE)
+devtools::install_github("statistnick-tamu/hoopTotals", build_vignettes = TRUE)
 ```
 
 
