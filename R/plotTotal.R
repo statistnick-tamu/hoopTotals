@@ -27,7 +27,7 @@ plotTotal <- function(ppm = 3.5, var = 5, threshold, line){
     stop("Please pass in valid scoring variability")
   }
 
-  if(is.null(threshold) || threshold < 0){
+  if(is.null(threshold) || threshold < 0 || threshold > 300){
     stop("Please pass in a valid scoring threshold")
   }
 

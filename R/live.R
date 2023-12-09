@@ -42,7 +42,7 @@ live <- function(ppm = 3.5, var = 5, time = 20, current, threshold, line = NULL)
     stop("Please pass in a valid current score")
   }
 
-  if(is.null(threshold) || threshold < current){
+  if(is.null(threshold) || threshold < current || threshold > 300){
     stop("Please pass in a valid threshold")
   }
 
@@ -63,7 +63,7 @@ live <- function(ppm = 3.5, var = 5, time = 20, current, threshold, line = NULL)
   eta.hat <- 40 * lambda.hat * ybar
 
   # expected points based on gamma process model
-  exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat * t))
+  exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat * (1-t)))
 
   # probability that the final total points are greater than a threshold
   # given the current total points at time t
@@ -76,7 +76,7 @@ live <- function(ppm = 3.5, var = 5, time = 20, current, threshold, line = NULL)
   if(!is.null(line)){
     tot.line <- line
     eta.hat.b <- lambda.hat * tot.line
-    exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b * t)) + h
+    exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b * (1-t))) + h
     prob <- gammainc(eta.hat.b * (1-t), lambda.hat * (tau - h))[[3]]
   }
 
