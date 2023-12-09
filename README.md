@@ -33,8 +33,8 @@ total: calculates expected points scored for a game
 
 live: adjusts expected points based on what has happened in the game
 
-train: calculates parameters to pass into total & live for specific
-teams
+train: calculates parameters to pass into the other functions for
+specific teams
 
 plotTotal: creates a hypothetical scoring flow plot
 
@@ -45,13 +45,13 @@ Here are a few quick examples:
 ``` r
 library(hoopTotals)
 total(3.5,5)
-#> [1] 139.6454
+#> [1] 139.0054
 ```
 
 ``` r
 live(3.5, 5, 20, 76, 152)
 #> $exp.pts
-#> [1] 145.7068
+#> [1] 145.3691
 #> 
 #> $prob
 #> [1] 0.2926388
@@ -65,3 +65,5 @@ plotTotal(3.5, 5, 140, 144.5)
 ```
 
 <img src="man/figures/README-plot-1.png" width="100%" />
+
+Please see the vignette or documentation for more information.

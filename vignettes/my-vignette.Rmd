@@ -56,22 +56,24 @@ live(3.5, 5, time = 20, current = 70, threshold = 140, line = 150)
 ```
 
 The interesting part of the method is the live component. Here, we have added a few
-more pieces of information: how much time is remaining, how many points are currently scored,
-and a user definied threshold (this could be a betting line, or a prior expected score).
+more pieces of information: how much time has passed, how many points are currently scored,
+and a user defined threshold (this could be a betting line, or a prior expected score).
 
 This function still returns the expected points but now calculates a probability that
 the threshold is exceeded and also converts that probability into a betting line (price).
 
-This is great, but we're still making a general assumption around how much a certain teams score.
+This is great, but we're still making a general assumption around how much certain teams score.
 We can do better than that.
 
 
 ## train
 
 In the 'train' function, you can provide play-by-play data in the form of a data frame for two teams
-and it will calculate the first two parameters to pass back in to the other functions.
+and it will calculate the first two parameters to pass back in to the other functions. See the 'train' help text for specifications around how to input the data.
 
-Included are data from Texas A&M and Iowa State's Men's Basketball teams.
+
+Included with the package are data from Texas A&M and Iowa State's Men's Basketball teams from the 2022-23 season and
+partial from the current 2023-24 season.
 
 ```{r data}
 head(home.df)
@@ -88,13 +90,13 @@ total(4.5375, 4.8663)
 
 We expect a much higher scoring game now. 
 
-The two teams played on 11/26/23 and had a much lower expected total.
+However, the two teams played on 11/26/23 and had a much lower expected total.
+If we feed in the pre-game line, we see a drastic decrease in expected points.
 
 ```{r total5}
 total(4.5375, 4.8663, line=135.5)
 ```
 
-If we feed in the pre-game line, we see a drastic decrease in expected points.
 
 At halftime, there were 70 points scored, let's see how that changes the expected points.
 
@@ -102,13 +104,13 @@ At halftime, there were 70 points scored, let's see how that changes the expecte
 live(4.5375, 4.8663, time=20, current=70, threshold=135.5, line=135.5)
 ```
 
-Now, we're expecting 138 points and a 62% chance of clearing the pre-game line.
+Now, we're expecting 137 points and a 62% chance of clearing the pre-game line.
 
 
 ## plotTotal
 
 Lastly, you can plot a hypothetical game flow using the plotTotal function. 
-You'll have to provide some similar information as the other functions:
+You'll have to provide similar information as the other functions:
 
 ```{r plot}
 plotTotal(ppm=4.5375, var=4.8663, threshold=135.5, line=135.5)

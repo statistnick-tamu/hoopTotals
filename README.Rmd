@@ -46,7 +46,7 @@ total: calculates expected points scored for a game
 
 live: adjusts expected points based on what has happened in the game
 
-train: calculates parameters to pass into total & live for specific teams
+train: calculates parameters to pass into the other functions for specific teams
 
 plotTotal: creates a hypothetical scoring flow plot
 
@@ -70,3 +70,6 @@ live(3.5, 5, 20, 76, 152)
 ```{r plot}
 plotTotal(3.5, 5, 140, 144.5)
 ```
+
+
+Please see the vignette or documentation for more information.
