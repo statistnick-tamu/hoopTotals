@@ -1,8 +1,14 @@
 #' live
 #'
+#'@description
+#'Calculates the total expected points for an in progress D1 Men's College Basketball game.
+#'Also calcuates the probability the score exceeds a provided threshold and includes a conversion
+#'to what an American betting line would be.
+#'
+#'
 #' @param ppm Points per minute combined of the two teams playing. This defaults to the NCAA 2021-22 & 22-23 average.
 #' @param var Variance of PPM of the two teams. This defaults to the NCAA 2021-22 & 22-23 average.
-#' @param time Time remaining in the game. Defaults to half game remaining (20min).
+#' @param time Time passed in the game. Defaults to half game (20min).
 #' @param current current points scored
 #' @param threshold scoring threshold to meet
 #' @param line Optional - betting line (expected points scored)
@@ -26,6 +32,18 @@ live <- function(ppm = 3.5, var = 5, time = 20, current, threshold, line = NULL)
 
   if(var < 0){
     stop("Please pass in valid scoring variability")
+  }
+
+  if(time < 0 || time > 40){
+    stop("Please pass in a valid time")
+  }
+
+  if(is.null(current) || current < 0){
+    stop("Please pass in a valid current score")
+  }
+
+  if(is.null(threshold) || threshold < current){
+    stop("Please pass in a valid threshold")
   }
 
   if(!is.null(line) && line < 0){

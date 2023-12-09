@@ -1,5 +1,9 @@
 #' plotTotal
 #'
+#'@description
+#'Plots a hypothetical game flow chart for points scored in a D1 Men's College Basketball game.
+#'
+#'
 #' @param ppm points per minute combined of the two teams
 #' @param var ppm variance of the two teams
 #' @param threshold scoring threshold to meet
@@ -11,15 +15,15 @@
 #' @examples
 #' plotTotal(4.96, 14.38, 168.5, 150.5)
 
-plotTotal <- function(ppm, var, threshold, line){
+plotTotal <- function(ppm = 3.5, var = 5, threshold, line){
 
   ## data checks
 
-  if(is.null(ppm) || ppm < 0){
+  if(ppm < 0){
     stop("Please pass in valid points per minute")
   }
 
-  if(is.null(var) || var < 0){
+  if(var < 0){
     stop("Please pass in valid scoring variability")
   }
 

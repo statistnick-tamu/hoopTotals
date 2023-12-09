@@ -1,5 +1,8 @@
 #' total
 #'
+#'@description
+#'Calculates the total points expected to be scored in a standard D1 Men's College Basketball game.
+#'
 #' @param ppm Points per minute combined of the two teams playing. This defaults to the NCAA 2021-22 & 22-23 average.
 #' @param var Variance of PPM of the two teams. This defaults to the NCAA 2021-22 & 22-23 average.
 #' @param line Optional - betting line (expected points scored)
@@ -26,7 +29,7 @@ total <- function(ppm = 3.5, var = 5, line = NULL){
   }
 
   if(!is.null(line) && line < 0){
-    stop("Please pass in a valid O/U line")
+    stop("Please pass in a valid O/U total")
   }
 
   # initialize params
@@ -45,7 +48,6 @@ total <- function(ppm = 3.5, var = 5, line = NULL){
     tot.line <- line
     eta.hat.b <- lambda.hat * tot.line
     exp.pts <- mean(rgamma(1000, rate=lambda.hat, shape=eta.hat.b))
-    prob <- gammainc(eta.hat.b, lambda.hat)[[3]]
   }
   return(exp.pts)
 }
