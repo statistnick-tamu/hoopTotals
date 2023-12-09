@@ -56,7 +56,7 @@ plotTotal <- function(ppm = 3.5, var = 5, threshold, line){
   # construct plot
   ggplot2::ggplot(est.df, ggplot2::aes(x = V1, y = est.p)) +
     ggplot2::geom_step(linewidth = 1, aes(colour="black")) +
-    ggplot2::geom_hline(aes(yintercept=140, colour = "dodgerblue"), show.legend = FALSE) +
+    ggplot2::geom_hline(aes(yintercept=threshold, colour = "dodgerblue"), show.legend = FALSE) +
     ggplot2::labs(title = "Hypothetical game flow") +
     ggplot2::labs(x = "Minutes", y = "Points") +
     ggplot2::scale_colour_manual(name='Legend',
